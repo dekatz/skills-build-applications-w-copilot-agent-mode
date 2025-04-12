@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from pymongo import MongoClient
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure--b&s2yj%!o9cy4eb55g3qf9ahc8)oy@b#z@(rl9ck_68yw2cg)"
+SECRET_KEY = "django-insecure--b&s2yj%!o9cy4eb55g3qf9ahc8)oy@b#z@(rl9ck_68yw2cg"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,12 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "djongo",
     "corsheaders",
-    "backend.octofit_tracker",  # Ensure this is the correct path
+    "backend.octofit_tracker",
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -53,6 +52,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "backend.octofit_tracker.urls"
@@ -76,15 +76,15 @@ TEMPLATES = [
 WSGI_APPLICATION = "backend.octofit_tracker.wsgi.application"
 
 
-# MongoDB connection
-MONGO_CLIENT = MongoClient("mongodb://127.0.0.1:27017/")
-MONGO_DB = MONGO_CLIENT["octofit_db"]
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# Replace the DATABASES section with the suggested SQLite configuration
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",  # Path to SQLite database file
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'monafit_db',
+        'HOST': 'localhost',
+        'PORT': 27017,
     }
 }
 
@@ -130,7 +130,4 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Enable CORS
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-CORS_ALLOW_HEADERS = ["*"]
