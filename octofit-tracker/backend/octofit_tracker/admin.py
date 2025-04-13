@@ -1,2 +1,6 @@
-# Django admin is not compatible with pymongo.
-# Use MongoDB tools like MongoDB Compass or build a custom admin interface if needed.
+from django.contrib import admin
+from .models import User
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email')  # Fields to display in the admin interface

@@ -2,12 +2,12 @@ from djongo import models
 
 class User(models.Model):
     _id = models.ObjectIdField()
-    username = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)  # Change from 'username' to 'name'
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.username
+        return self.name
 
 class Team(models.Model):
     _id = models.ObjectIdField()

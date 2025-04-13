@@ -26,7 +26,11 @@ SECRET_KEY = "django-insecure--b&s2yj%!o9cy4eb55g3qf9ahc8)oy@b#z@(rl9ck_68yw2cg"
 DEBUG = True
 
 # Allow all hosts
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "crispy-space-spoon-vjxw96xrjx4f66p7-8000.app.github.dev"
+]
 
 
 # Application definition

@@ -5,18 +5,15 @@ from rest_framework.reverse import reverse
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
 from .models import User, Team, Activity, Leaderboard, Workout
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def api_root(request, format=None):
-    if request.method == 'POST':
-        return Response({"message": "POST request received"}, status=status.HTTP_201_CREATED)
-
-    base_url = '[USE CODESPACE URL]'
+    codespace_url = "https://crispy-space-spoon-vjxw96xrjx4f66p7-8000.app.github.dev"
     return Response({
-        'users': base_url + 'api/users/?format=api',
-        'teams': base_url + 'api/teams/?format=api',
-        'activities': base_url + 'api/activities/?format=api',
-        'leaderboard': base_url + 'api/leaderboard/?format=api',
-        'workouts': base_url + 'api/workouts/?format=api'
+        'users': f'{codespace_url}/api/users/',
+        'teams': f'{codespace_url}/api/teams/',
+        'activities': f'{codespace_url}/api/activities/',
+        'leaderboard': f'{codespace_url}/api/leaderboard/',
+        'workouts': f'{codespace_url}/api/workouts/',
     })
 
 class UserViewSet(viewsets.ModelViewSet):
